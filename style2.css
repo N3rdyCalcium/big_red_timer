@@ -1,6 +1,7 @@
 body {
   margin: 0;
   background-color: black;
+  font-family: Arial, Helvetica, sans-serif;
   display: flex;
   flex-direction: column;  /* stack children vertically */
   justify-content: center;
