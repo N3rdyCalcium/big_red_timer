@@ -10,7 +10,7 @@ $beepCountdown = isset($_REQUEST['beepCountdown']) ? ($_REQUEST['beepCountdown']
 <!DOCTYPE html>
 <html>
     <head>
-    <title><?php echo $min," Minute and ", $sec, "Second Timer"; ?></title>
+    <title><?php echo $min," Minute and ", $sec, " Second Timer"; ?></title>
         <link rel=stylesheet href="style2.css">
     </head>
     <body>
