@@ -67,7 +67,7 @@ function updateTimer() {
         if (flashBool) {
             startFlash();
         } 
-        if (beep) {
+        if (beep && !beepCountdown) {
             shortBeep();
         }
     }
