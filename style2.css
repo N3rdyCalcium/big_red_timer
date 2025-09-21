@@ -1,0 +1,54 @@
+body {
+  margin: 0;
+  background-color: black;
+  display: flex;
+  flex-direction: column;  /* stack children vertically */
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.timer-container {
+  width: 100vw;             /* full viewport width */
+  height: 100vh;            /* full viewport height */
+  border-style: solid;      /* border visible */
+  border-width: 5px;        /* thickness */
+  border-color: red;        /* color */
+  border-radius: 0;         /* optional: remove rounding for full page */
+  display: flex;            
+  justify-content: center;  /* center timer text horizontally */
+  align-items: center;      /* center timer text vertically */
+  overflow: hidden;
+  box-sizing: border-box;   /* include border in width/height */
+}
+
+/* only animate if checkbox is checked */
+.timer-container.flash {
+  animation: blink 1s infinite;
+}
+
+.timer.flash {
+    animation: blink 1s infinite;
+}
+
+.timer {
+  font-size: 60vmin; /* very large text relative to viewport */
+  color: red;
+  line-height: 1;    /* no extra spacing */
+  text-align: center;
+}
+
+
+
+button {
+  font-size: 1rem;             /* normal size text */
+  padding: 8px 16px;           /* standard button size */
+  cursor: pointer;
+}
+
+@keyframes blink {
+  0%   { background: red; color: black;}
+  50%  { background: black; color: red;}
+  100% { background: red; color: black;}
+}

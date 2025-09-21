@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TIMER SCREEN</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <h1>THE BIG RED TIMER</h1>
+        <h3>Use this to show a timer for entertainment purposes like classrooms, shows, etc.</h3>
+        <br><br>
+        <h2>Set timer</h2>
+        <input type="number" id="min" placeholder="Minutes">:<input type="number" id="sec" placeholder="Seconds">
+        <button onclick="preview()">Preview</button>
+        <button onclick="refresh()">Reset</button>
+        <br>
+        <input type="checkbox" id="beepToggle"><label for="beepToggle">Check beep sound</label>
+        <div id="visible" style="display: none;">
+            <input type="checkbox" id="toggleFlash" name="flashBool" value="false"><label for="toggleFlash">Flash</label>
+            <input type="checkbox" id="beepAlert" name="beepAlert" value="false"><label for="beepAlert">Beep</label>
+                <div style="display: none;" id="beepCheck"><input type="checkbox" id="beepCountdown" name="beepCountdown" value="false"><label for="beepCountdown">Beep on countdown</label></div>
+            <div class="border">
+                <div class="timer-preview" id="timerPreview"></div>
+            </div>
+            <form action="timer.php" action="GET">
+                <input type="hidden" id="beepAlertValue" name="beepAlert">
+                <input type="hidden" id="beepCountdownValue" name="beepCountdown">
+                <input type="hidden" id="hiddenMin" name="min">
+                <input type="hidden" id="hiddenSec" name="sec">
+                <input type="hidden" id="hiddenFlash" name="flashBool">
+                <input type="hidden" id="title" name="title">
+                <br>
+                <input type="submit" value="Start Timer!">
+            </form>
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>
