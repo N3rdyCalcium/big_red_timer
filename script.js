@@ -18,7 +18,6 @@ function preview() {
     hiddenInputMin.value = min;
     hiddenInputSec.value = sec;
 
-    //shareLink.value = "https://pro70crazy.wuaze.com/HTMLtest/scrolling_text/scroll.php?msg=" + encodeURIComponent(text).replace(/%20/g, "+");
     visible.style.display = "block";
 }
 
@@ -48,7 +47,7 @@ const beepAlertCheck = document.getElementById("beepAlert");
 toggleFlash.addEventListener("change", function() { // normal function to use 'this'
     flash = this.checked;        // true if checked, false if unchecked
     hiddenFlash.value = flash;   // update hidden input
-    console.log(flash);          // debug
+    console.log(hiddenFlash.value);          // debug
 });
 
 // The Beep function (for check sound purposes only)
@@ -115,6 +114,7 @@ function refresh() {
   location.reload();
 }
 
+shareLink.value = "https://pro70crazy.wuaze.com/HTMLtest/big_red_timer/timer.php?beepAlert=" + beepAlertValue.value + "&beepCountdown=" + beepCountdownValue.value + "&min=" + min.value + "&sec=" + sec.value + "&flashBool=" + hiddenFlash.value + "&title=" + min.value + ":" + sec.value;
 function copyLink() {
   // Get the text field
   var copyText = document.getElementById("shareLink");
@@ -134,85 +134,6 @@ function copyLink() {
 }
 
 // This is the code for the PHP, it will not run on PHP. It needs to be run inside the PHP file inside the <script>
-// get starting values from PHP
-let minutes = <?php echo $min; ?>;
-let seconds = <?php echo $sec; ?>;
-let flashBool = <?php echo json_encode($flash); ?>;
-let beep = <?php echo json_encode($beep); ?>;
-let beepCountdown = <?php echo json_encode($beepCountdown); ?>;
-
-const timer = document.getElementById('timer');
-const container = document.querySelector('.timer-container');
-
-function startFlash() {
-    container.classList.add('flash');
-    timer.classList.add('flash');
-}
-
-function longBeep() {
-    const audioCtx = new AudioContext();
-    const oscillator = audioCtx.createOscillator();
-
-    oscillator.type = "square";
-    oscillator.frequency.setValueAtTime(440, audioCtx.currentTime);
-    oscillator.connect(audioCtx.destination);
-    oscillator.start();
-    oscillator.stop(audioCtx.currentTime + 1);
-}
-
-function shortBeep() {
-    const audioCtx = new AudioContext();
-    const oscillator = audioCtx.createOscillator();
-
-    oscillator.type = "square";
-    oscillator.frequency.setValueAtTime(440, audioCtx.currentTime);
-    oscillator.connect(audioCtx.destination);
-    oscillator.start();
-    oscillator.stop(audioCtx.currentTime + 0.1);
-}
-
-function updateTimer() {
-    // Display MM:SS
-    timer.textContent = String(minutes).padStart(2,'0') + ":" + String(seconds).padStart(2,'0');
-
-    // trigger in the last 5 seconds
-    if (minutes === 0 && seconds <= 5 && seconds > 0) {
-        if (flashBool) {
-            startFlash();
-        } 
-        if (beep) {
-            shortBeep();
-        }
-    }
-
-    if (minutes === 0 && seconds === 0) {
-        if (beep) {
-            longBeep();
-        }
-        setTimeout(() => {
-            alert("Time's up!"); // alert when timer ends
-        }, 1000);
-        return;
-    }
-
-    // Countdown logic
-    if (seconds === 0) {
-        if (minutes > 0) {
-            minutes--;
-            seconds = 59;
-        }
-    } else {
-        seconds--;
-    }
-    if (beepCountdown) {
-        shortBeep();
-    }
-    setTimeout(updateTimer, 1000); // repeat every second
-}
-
-// Start the timer
-updateTimer();
-
 function enterFullscreen() {
   console.log("Button clicked");
   if (!document.fullscreenElement) {
