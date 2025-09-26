@@ -36,26 +36,35 @@ function startFlash() {
     timer.classList.add('flash');
 }
 
-function longBeep() {
-    const audioCtx = new AudioContext();
-    const oscillator = audioCtx.createOscillator();
+let audioCtx;
 
-    oscillator.type = "square";
-    oscillator.frequency.setValueAtTime(440, audioCtx.currentTime);
-    oscillator.connect(audioCtx.destination);
-    oscillator.start();
-    oscillator.stop(audioCtx.currentTime + 1);
-}
+// Unlock/resume audio context on first user interaction
+document.body.addEventListener("click", () => {
+    if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    } else if (audioCtx.state === "suspended") {
+        audioCtx.resume();
+    }
+}, { once: true });
 
 function shortBeep() {
-    const audioCtx = new AudioContext();
+    if (!audioCtx) return; // skip if not ready
     const oscillator = audioCtx.createOscillator();
-
     oscillator.type = "square";
     oscillator.frequency.setValueAtTime(440, audioCtx.currentTime);
     oscillator.connect(audioCtx.destination);
     oscillator.start();
     oscillator.stop(audioCtx.currentTime + 0.1);
+}
+
+function longBeep() {
+    if (!audioCtx) return;
+    const oscillator = audioCtx.createOscillator();
+    oscillator.type = "square";
+    oscillator.frequency.setValueAtTime(440, audioCtx.currentTime);
+    oscillator.connect(audioCtx.destination);
+    oscillator.start();
+    oscillator.stop(audioCtx.currentTime + 1);
 }
 
 function updateTimer() {
