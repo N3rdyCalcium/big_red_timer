@@ -34,10 +34,11 @@ body {
 }
 
 .timer {
-  font-size: 60vmin; /* very large text relative to viewport */
+  font-size: min(60vmin, 35vw, 90vh); /* very large text relative to viewport */
   color: red;
   line-height: 1;    /* no extra spacing */
   text-align: center;
+  white-space: nowrap;
 }
 
 
