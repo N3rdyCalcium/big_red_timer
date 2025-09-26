@@ -18,6 +18,7 @@ $beepCountdown = isset($_REQUEST['beepCountdown']) ? ($_REQUEST['beepCountdown']
         <div class="timer" id="timer"></div>
     </div>
     <br>
+    <a href="index.html">Set Timer again</a>
     <button onclick=enterFullscreen() id=fsBtn>Fullscreen</button>
     </body>
     <script>
